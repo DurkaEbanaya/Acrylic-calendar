@@ -97,16 +97,16 @@ dist/Acrylic-calendar-binaries.zip
 dist/SHA256SUMS.txt
 ```
 
-Suggested release tag:
+Example release tag:
 
 ```text
-v1.0.0
+v1.1.0
 ```
 
-Suggested release title:
+Example release title:
 
 ```text
-Acrylic Calendar 1.0
+Acrylic Calendar 1.1
 ```
 
 ## Clean Build
