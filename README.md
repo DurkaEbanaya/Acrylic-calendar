@@ -4,7 +4,7 @@ Acrylic Calendar is a native macOS menu bar calendar built with Swift and AppKit
 
 The app is original AppKit drawing code. It does not ship Microsoft binaries, copied Microsoft assets, trademarks, or proprietary resources.
 
-![Acrylic Calendar year view](docs/images/year-view.svg)
+![Acrylic Calendar month view with flyout](docs/images/menu-flyout.svg)
 
 ## Highlights
 
@@ -21,7 +21,7 @@ The app is original AppKit drawing code. It does not ship Microsoft binaries, co
 
 ## Screenshots
 
-![Menu bar flyout](docs/images/menu-flyout.svg)
+![Year view](docs/images/year-view.svg)
 
 ![Settings and about](docs/images/settings-about.svg)
 
