@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1700" viewBox="0 0 1400 1700">
+  <defs>
+    <linearGradient id="wallpaper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b2038"/>
+      <stop offset="0.35" stop-color="#0f7a84"/>
+      <stop offset="0.65" stop-color="#6f2f83"/>
+      <stop offset="1" stop-color="#e1b46a"/>
+    </linearGradient>
+    <linearGradient id="wallpaper2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1b3154"/>
+      <stop offset="0.5" stop-color="#1aa6b7"/>
+      <stop offset="1" stop-color="#e45f4f"/>
+    </linearGradient>
+    <linearGradient id="darkAcrylic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f1f1f" stop-opacity="0.83"/>
+      <stop offset="1" stop-color="#0f0f0f" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="lightAcrylic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.74"/>
+      <stop offset="1" stop-color="#f3f3f3" stop-opacity="0.62"/>
+    </linearGradient>
+    <radialGradient id="revealLight" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.36" stop-color="#8bdcff" stop-opacity="0.54"/>
+      <stop offset="1" stop-color="#8bdcff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+    <filter id="smallShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+    <pattern id="noise" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="transparent"/>
+      <circle cx="1" cy="2" r="0.55" fill="#fff" opacity="0.14"/>
+      <circle cx="5" cy="3" r="0.45" fill="#000" opacity="0.13"/>
+      <circle cx="6" cy="7" r="0.5" fill="#fff" opacity="0.1"/>
+    </pattern>
+    <style>
+      .title { font: 700 36px 'Segoe UI', Arial, sans-serif; fill: #111; }
+      .subtitle { font: 400 18px 'Segoe UI', Arial, sans-serif; fill: #444; }
+      .panelTitle { font: 700 22px 'Segoe UI', Arial, sans-serif; fill: #111; }
+      .label { font: 600 15px 'Segoe UI', Arial, sans-serif; fill: #222; }
+      .small { font: 400 14px 'Segoe UI', Arial, sans-serif; fill: #555; }
+      .darkText { font: 400 14px 'Segoe UI', Arial, sans-serif; fill: #f3f3f3; }
+      .darkTitle { font: 700 18px 'Segoe UI', Arial, sans-serif; fill: #fff; }
+      .accent { fill: #0078d7; }
+      .winBorder { fill: none; stroke: #d7d7d7; stroke-width: 1; }
+      .panel { fill: #f6f6f6; stroke: #d8d8d8; stroke-width: 1; }
+      .note { font: 600 13px 'Segoe UI', Arial, sans-serif; fill: #0078d7; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="1700" fill="#ececec"/>
+  <text x="70" y="72" class="title">Fluent Design System для Windows 10: визуальные примеры</text>
+  <text x="70" y="106" class="subtitle">Оригинальная логика 2017-2019: Light, Depth, Motion, Material, Scale. Без Mica и визуального языка Windows 11.</text>
+
+  <g transform="translate(70 145)">
+    <rect class="panel" width="600" height="360"/>
+    <text x="24" y="40" class="panelTitle">1. Acrylic: материал и глубина</text>
+    <rect x="24" y="68" width="552" height="250" fill="url(#wallpaper)"/>
+    <circle cx="118" cy="130" r="64" fill="#ffffff" opacity="0.1"/>
+    <circle cx="482" cy="258" r="94" fill="#ffffff" opacity="0.08"/>
+    <rect x="46" y="92" width="168" height="204" fill="url(#darkAcrylic)" filter="url(#smallShadow)"/>
+    <rect x="46" y="92" width="168" height="204" fill="url(#noise)" opacity="0.65"/>
+    <rect x="46" y="92" width="4" height="44" class="accent"/>
+    <text x="68" y="122" class="darkTitle">Groove</text>
+    <text x="68" y="158" class="darkText">Explore</text>
+    <text x="68" y="188" class="darkText">My music</text>
+    <text x="68" y="218" class="darkText">Recommended</text>
+    <text x="68" y="248" class="darkText">Now playing</text>
+    <rect x="242" y="105" width="294" height="176" fill="#fbfbfb" filter="url(#softShadow)"/>
+    <rect x="262" y="128" width="78" height="58" fill="#0078d7"/>
+    <rect x="356" y="128" width="78" height="58" fill="#2b88d8"/>
+    <rect x="450" y="128" width="68" height="58" fill="#00bcf2"/>
+    <rect x="262" y="204" width="256" height="10" fill="#d9d9d9"/>
+    <rect x="262" y="226" width="210" height="10" fill="#d9d9d9"/>
+    <text x="24" y="342" class="small">Применение: flyout, context menu, light-dismiss pane, боковая панель поверх контента.</text>
+  </g>
+
+  <g transform="translate(730 145)">
+    <rect class="panel" width="600" height="360"/>
+    <text x="24" y="40" class="panelTitle">2. Reveal: свет как подсказка</text>
+    <rect x="24" y="72" width="552" height="240" fill="#1d1d1d"/>
+    <rect x="62" y="102" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <rect x="224" y="102" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <rect x="386" y="102" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <rect x="62" y="178" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <rect x="224" y="178" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <rect x="386" y="178" width="150" height="58" fill="#2a2a2a" stroke="#4a4a4a"/>
+    <circle cx="360" cy="132" r="102" fill="url(#revealLight)"/>
+    <rect x="224" y="102" width="150" height="58" fill="none" stroke="#8bdcff" stroke-width="2" opacity="0.85"/>
+    <text x="92" y="138" class="darkText">Mail</text>
+    <text x="254" y="138" class="darkText">Photos</text>
+    <text x="416" y="138" class="darkText">Music</text>
+    <text x="92" y="214" class="darkText">Maps</text>
+    <text x="254" y="214" class="darkText">Store</text>
+    <text x="416" y="214" class="darkText">News</text>
+    <path d="M365 126 l32 22 l-19 4 l10 22 l-12 6 l-10 -23 l-15 14 z" fill="#fff" stroke="#111"/>
+    <text x="24" y="342" class="small">Свет появляется от указателя/фокуса и выявляет границы интерактивного элемента.</text>
+  </g>
+
+  <g transform="translate(70 545)">
+    <rect class="panel" width="600" height="360"/>
+    <text x="24" y="40" class="panelTitle">3. Depth + Parallax: слои, а не плоский лист</text>
+    <rect x="24" y="70" width="552" height="244" fill="#dfeaf0"/>
+    <rect x="24" y="70" width="552" height="244" fill="url(#wallpaper2)" opacity="0.78"/>
+    <circle cx="128" cy="165" r="68" fill="#fff" opacity="0.14"/>
+    <circle cx="480" cy="112" r="52" fill="#fff" opacity="0.11"/>
+    <rect x="84" y="105" width="178" height="162" fill="#ffffff" opacity="0.9" filter="url(#smallShadow)"/>
+    <rect x="104" y="126" width="138" height="12" fill="#c8c8c8"/>
+    <rect x="104" y="156" width="138" height="12" fill="#c8c8c8"/>
+    <rect x="104" y="186" width="110" height="12" fill="#c8c8c8"/>
+    <rect x="316" y="86" width="188" height="204" fill="#ffffff" filter="url(#softShadow)"/>
+    <rect x="340" y="112" width="140" height="92" fill="#0078d7"/>
+    <rect x="340" y="222" width="140" height="12" fill="#cfcfcf"/>
+    <rect x="340" y="248" width="100" height="12" fill="#cfcfcf"/>
+    <path d="M284 196 C318 180 344 154 360 104" stroke="#fff" stroke-width="3" opacity="0.72" fill="none"/>
+    <text x="24" y="342" class="small">Parallax: foreground быстрее background; общий объект может перейти в detail view.</text>
+  </g>
+
+  <g transform="translate(730 545)">
+    <rect class="panel" width="600" height="360"/>
+    <text x="24" y="40" class="panelTitle">4. Motion: связность переходов</text>
+    <rect x="44" y="82" width="210" height="220" fill="#ffffff" stroke="#d0d0d0"/>
+    <text x="66" y="116" class="label">Grid</text>
+    <rect x="66" y="136" width="70" height="54" fill="#0078d7"/>
+    <rect x="150" y="136" width="70" height="54" fill="#00bcf2"/>
+    <rect x="66" y="204" width="70" height="54" fill="#8661c5"/>
+    <rect x="150" y="204" width="70" height="54" fill="#e81123"/>
+    <rect x="346" y="82" width="210" height="220" fill="#ffffff" stroke="#d0d0d0"/>
+    <text x="368" y="116" class="label">Detail</text>
+    <rect x="368" y="136" width="166" height="100" fill="#0078d7"/>
+    <rect x="368" y="256" width="132" height="12" fill="#d0d0d0"/>
+    <path d="M136 163 C220 78 298 68 368 166" stroke="#0078d7" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+    <circle cx="246" cy="93" r="5" fill="#0078d7"/>
+    <circle cx="286" cy="96" r="4" fill="#0078d7" opacity="0.6"/>
+    <text x="24" y="342" class="small">Connected animation: элемент продолжает путь между состояниями.</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0078d7"/>
+    </marker>
+  </defs>
+
+  <g transform="translate(70 945)">
+    <rect class="panel" width="1260" height="340"/>
+    <text x="24" y="40" class="panelTitle">5. Scale: одна идея на разных устройствах и вводах</text>
+    <rect x="56" y="78" width="330" height="196" fill="#1e1e1e" filter="url(#smallShadow)"/>
+    <rect x="78" y="104" width="92" height="148" fill="url(#darkAcrylic)"/>
+    <rect x="198" y="104" width="152" height="92" fill="#0078d7"/>
+    <rect x="198" y="218" width="120" height="12" fill="#666"/>
+    <text x="58" y="306" class="label">Desktop / mouse + keyboard</text>
+
+    <rect x="488" y="78" width="196" height="222" rx="10" fill="#151515" filter="url(#smallShadow)"/>
+    <rect x="506" y="98" width="160" height="184" fill="#f8f8f8"/>
+    <rect x="524" y="118" width="124" height="44" fill="#0078d7"/>
+    <rect x="524" y="180" width="124" height="20" fill="#d0d0d0"/>
+    <rect x="524" y="216" width="92" height="20" fill="#d0d0d0"/>
+    <text x="494" y="326" class="label">Tablet / touch</text>
+
+    <rect x="782" y="84" width="260" height="156" fill="#101010" filter="url(#smallShadow)"/>
+    <rect x="810" y="112" width="96" height="56" fill="#0078d7"/>
+    <rect x="922" y="112" width="92" height="56" fill="#2b88d8"/>
+    <rect x="810" y="184" width="204" height="20" fill="#3a3a3a"/>
+    <text x="782" y="306" class="label">TV / gamepad</text>
+
+    <circle cx="1160" cy="148" r="74" fill="#e9e9e9" stroke="#bdbdbd" filter="url(#smallShadow)"/>
+    <circle cx="1135" cy="142" r="22" fill="#0078d7" opacity="0.85"/>
+    <circle cx="1195" cy="162" r="15" fill="#00bcf2" opacity="0.85"/>
+    <path d="M1100 224 C1128 252 1194 252 1220 224" stroke="#777" stroke-width="5" fill="none"/>
+    <text x="1100" y="306" class="label">HoloLens / gaze</text>
+  </g>
+
+  <g transform="translate(70 1325)">
+    <rect class="panel" width="1260" height="280"/>
+    <text x="24" y="40" class="panelTitle">6. Граница стиля: что не является Windows 10 Fluent</text>
+    <g transform="translate(48 78)">
+      <rect width="230" height="150" rx="22" fill="#f7f7f7" stroke="#d6d6d6"/>
+      <rect x="30" y="30" width="170" height="78" rx="18" fill="#ffffff" stroke="#dedede"/>
+      <text x="30" y="134" class="small">Mica / большие скругления</text>
+      <path d="M16 16 L214 134" stroke="#e81123" stroke-width="6"/>
+    </g>
+    <g transform="translate(354 78)">
+      <rect width="230" height="150" fill="#dff3ff" stroke="#b6e3ff"/>
+      <rect x="16" y="24" width="198" height="84" fill="#ffffff" opacity="0.32"/>
+      <text x="30" y="134" class="small">Aero-стекло без цели</text>
+      <path d="M16 16 L214 134" stroke="#e81123" stroke-width="6"/>
+    </g>
+    <g transform="translate(660 78)">
+      <rect width="230" height="150" fill="#111"/>
+      <circle cx="115" cy="75" r="82" fill="#00ffff" opacity="0.55"/>
+      <text x="30" y="134" class="small" style="fill:#fff">Неоновый glow везде</text>
+      <path d="M16 16 L214 134" stroke="#e81123" stroke-width="6"/>
+    </g>
+    <g transform="translate(966 78)">
+      <rect width="230" height="150" fill="#ffffff" stroke="#d6d6d6"/>
+      <rect x="18" y="20" width="194" height="28" fill="#f0f0f0"/>
+      <rect x="18" y="60" width="194" height="28" fill="#f0f0f0"/>
+      <rect x="18" y="100" width="194" height="28" fill="#f0f0f0"/>
+      <text x="18" y="134" class="small">Только Metro-плоскость</text>
+      <path d="M16 16 L214 134" stroke="#e81123" stroke-width="6"/>
+    </g>
+  </g>
+
+  <text x="70" y="1652" class="subtitle">Используйте прямоугольные Windows 10-поверхности, акцентный цвет, Segoe UI, Acrylic с blur/noise/tint, Reveal на hover/focus, связную motion и адаптацию под ввод.</text>
+</svg>

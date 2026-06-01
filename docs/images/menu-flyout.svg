@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="760" viewBox="0 0 720 760">
+  <defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2b3942" stop-opacity=".96"/><stop offset="1" stop-color="#080b0e" stop-opacity=".94"/></linearGradient></defs>
+  <rect width="720" height="760" fill="#0d0f10"/>
+  <rect x="80" y="38" width="560" height="684" fill="url(#a)" stroke="#ffffff" stroke-opacity=".18"/>
+  <text x="120" y="100" fill="#fff" font-family="Segoe UI Light, Segoe UI, Arial" font-size="32">Monday, June 1, 2026</text>
+  <text x="120" y="160" fill="#fff" font-family="Segoe UI, Arial" font-size="22" font-weight="600">June 2026</text>
+  <text x="492" y="160" fill="#fff" font-family="Segoe UI, Arial" font-size="18">Today</text>
+  <g fill="#fff" font-family="Segoe UI, Arial" font-weight="600" font-size="17"><text x="130" y="214">Mon</text><text x="198" y="214">Tue</text><text x="266" y="214">Wed</text><text x="334" y="214">Thu</text><text x="402" y="214">Fri</text><text x="470" y="214">Sat</text><text x="538" y="214">Sun</text></g>
+  <g fill="#f6f6f6" font-family="Segoe UI, Arial" font-size="20"><rect x="120" y="236" width="46" height="42" fill="#0078d7"/><text x="138" y="264" fill="#fff">1</text><text x="206" y="264">2</text><text x="274" y="264">3</text><text x="342" y="264">4</text><text x="410" y="264">5</text><text x="478" y="264">6</text><text x="546" y="264">7</text><text x="138" y="318">8</text><text x="202" y="318">9</text><text x="266" y="318">10</text><text x="334" y="318">11</text><text x="402" y="318">12</text><text x="470" y="318">13</text><text x="538" y="318">14</text><text x="130" y="372">15</text><text x="198" y="372">16</text><text x="266" y="372">17</text><text x="334" y="372">18</text><text x="402" y="372">19</text><text x="470" y="372">20</text><text x="538" y="372">21</text></g>
+  <line x1="80" y1="442" x2="640" y2="442" stroke="#fff" stroke-opacity=".15"/>
+  <text x="120" y="502" fill="#fff" font-family="Segoe UI, Arial" font-size="28" font-weight="700">Today</text>
+  <rect x="120" y="536" width="480" height="46" fill="none" stroke="#fff" stroke-opacity=".25"/>
+  <text x="138" y="566" fill="#c8d1d8" font-family="Segoe UI, Arial" font-size="20">Add an event or reminder</text>
+  <rect x="120" y="620" width="4" height="42" fill="#0078d7"/>
+  <text x="140" y="640" fill="#fff" font-family="Segoe UI, Arial" font-size="18" font-weight="600">Project release</text>
+  <text x="140" y="663" fill="#b8c0c8" font-family="Segoe UI, Arial" font-size="15">10:00 - 11:00</text>
+</svg>
