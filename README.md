@@ -16,7 +16,7 @@ The app is original AppKit drawing code. It does not ship Microsoft binaries, co
 - Menu bar date/time display with system, 12-hour, or 24-hour time options.
 - Localized UI for English, Russian, Ukrainian, German, French, Japanese, and Tatar.
 - Custom acrylic About window and generated Fluent-style calendar icon.
-- Login item support with automatic registration and a Settings checkbox.
+- Login item support controlled from Settings.
 - Runs as a menu bar utility without a Dock icon.
 
 ## Screenshots
@@ -106,9 +106,9 @@ Calendar access is required to display events. Write access is required only whe
 
 ## Login Item Behavior
 
-When launched as a packaged `.app`, Acrylic Calendar tries to register itself as a login item automatically. The Settings window also has an `Add to login items` checkbox.
+The Settings window has an `Add to login items` checkbox. The app does not register itself automatically on launch.
 
-If the user turns the checkbox off, the app remembers that manual choice and will not automatically re-enable login item registration on the next launch. Turning the checkbox back on clears that manual-disable flag.
+At startup, Acrylic Calendar also uses a single-instance lock so duplicate login items do not create duplicate menu bar clocks.
 
 ## Menu Bar Utility Behavior
 
@@ -118,6 +118,12 @@ The app is configured as a menu bar utility:
 - `NSApplication` uses `.accessory` activation policy.
 - The app does not appear in the Dock.
 - Windows are still shown and activated from the menu bar item.
+
+## Status Item Behavior
+
+Left-clicking the Acrylic Calendar date/time in the menu bar opens the calendar flyout through the same code path as the context menu's `Open calendar panel` command. It does not toggle the flyout closed.
+
+Right-clicking the menu bar item opens the context menu. To avoid a first-click AppKit tracking issue seen after login/relaunch, the first left-click open request retries the flyout show once after a short delay.
 
 ## Localization
 
@@ -139,6 +145,7 @@ Date formatters use the selected app locale, so month names, weekdays, dates, an
 ```text
 Package.swift
 Resources/
+  AppIcon.icns
   Info.plist
 Sources/FluentCalendar/
   AboutWindowController.swift
@@ -156,6 +163,7 @@ Sources/FluentCalendar/
 scripts/
   build_app.sh
   build_release_artifacts.sh
+  generate_app_icon.swift
 docs/images/
   menu-flyout.svg
   settings-about.svg
@@ -164,7 +172,7 @@ docs/images/
 
 ## Main Components
 
-- `AppDelegate`: app lifecycle, menu bar item, menus, login item registration, window controllers.
+- `AppDelegate`: app lifecycle, single-instance guard, menu bar item, menus, window controllers.
 - `CalendarPanelController`: key-capable `NSPanel` for the menu bar flyout.
 - `CalendarPanelView`: flyout drawing, mini month, agenda, quick event editor, EventKit refresh.
 - `FullCalendarWindowController`: full calendar window and custom Day/Week/Month/Year rendering.

@@ -21,6 +21,7 @@ mkdir -p "$BUNDLE_DIR/Contents/Resources"
 
 cp "$BIN_DIR/FluentCalendar" "$BUNDLE_DIR/Contents/MacOS/FluentCalendar"
 cp "$ROOT_DIR/Resources/Info.plist" "$BUNDLE_DIR/Contents/Info.plist"
+cp "$ROOT_DIR/Resources/AppIcon.icns" "$BUNDLE_DIR/Contents/Resources/AppIcon.icns"
 
 codesign --force --deep --sign - "$BUNDLE_DIR"
 

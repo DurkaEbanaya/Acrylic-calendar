@@ -85,7 +85,6 @@ final class AppSettings {
         static let appLanguage = "appLanguage"
         static let accentColorHex = "accentColorHex"
         static let usesSystemAccent = "usesSystemAccent"
-        static let launchAtLoginManuallyDisabled = "launchAtLoginManuallyDisabled"
     }
 
     private init() {
@@ -197,11 +196,6 @@ final class AppSettings {
             defaults.set(newValue, forKey: Key.usesSystemAccent)
             notifyChanged()
         }
-    }
-
-    var launchAtLoginManuallyDisabled: Bool {
-        get { defaults.bool(forKey: Key.launchAtLoginManuallyDisabled) }
-        set { defaults.set(newValue, forKey: Key.launchAtLoginManuallyDisabled) }
     }
 
     var customAccentColor: NSColor {

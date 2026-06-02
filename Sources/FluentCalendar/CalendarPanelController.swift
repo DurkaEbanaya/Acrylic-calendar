@@ -20,14 +20,6 @@ final class CalendarPanelController: NSObject {
         super.init()
     }
 
-    func toggle(relativeTo button: NSStatusBarButton) {
-        if panel?.isVisible == true {
-            close()
-        } else {
-            show(relativeTo: button)
-        }
-    }
-
     func show(relativeTo button: NSStatusBarButton) {
         sourceButton = button
 
@@ -42,6 +34,7 @@ final class CalendarPanelController: NSObject {
         contentView.reloadEvents()
         NSApp.activate(ignoringOtherApps: true)
         panel.makeKeyAndOrderFront(nil)
+        panel.orderFrontRegardless()
         panel.makeFirstResponder(contentView)
 
         installEventMonitors()

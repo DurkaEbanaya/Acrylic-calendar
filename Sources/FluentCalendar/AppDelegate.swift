@@ -1,5 +1,5 @@
 import AppKit
-import ServiceManagement
+import Darwin
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
@@ -8,10 +8,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var settingsWindowController: SettingsWindowController?
     private var fullCalendarWindowController: FullCalendarWindowController?
     private var aboutWindowController: AboutWindowController?
+    private var singleInstanceLockFileDescriptor: Int32 = -1
+    private var hasAttemptedCalendarPanelOpen = false
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        guard acquireSingleInstanceLock() else {
+            NSApp.terminate(nil)
+            return
+        }
+
+        terminateDuplicateRunningApplications()
+        scheduleDuplicateRunningApplicationCleanup()
         AppSettings.shared.applyAppearance()
-        ensureLaunchAtLoginEnabledIfAllowed()
         NSApp.applicationIconImage = AcrylicAppIcon.makeImage(size: 256)
         configureMainMenu()
 
@@ -33,17 +41,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             name: .fluentCalendarSettingsChanged,
             object: nil
         )
-
-        showFullCalendar()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         clockTimer?.invalidate()
+        releaseSingleInstanceLock()
     }
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if !flag {
-            showFullCalendar()
+        if !flag, let button = statusItem.button {
+            panelController.show(relativeTo: button)
         }
         return true
     }
@@ -52,7 +59,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem.button else { return }
         button.target = self
         button.action = #selector(statusItemPressed(_:))
-        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        button.sendAction(on: [.leftMouseDown, .leftMouseUp, .rightMouseUp])
         button.toolTip = "Acrylic calendar"
     }
 
@@ -122,7 +129,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if NSApp.currentEvent?.type == .rightMouseUp {
             showStatusMenu(relativeTo: button)
         } else {
-            panelController.toggle(relativeTo: button)
+            openCalendarPanel(relativeTo: button)
         }
     }
 
@@ -144,7 +151,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func openCalendarFromMenu() {
         guard let button = statusItem.button else { return }
-        panelController.show(relativeTo: button)
+        openCalendarPanel(relativeTo: button)
+    }
+
+    private func openCalendarPanel(relativeTo button: NSStatusBarButton) {
+        let shouldRetryFirstOpen = !hasAttemptedCalendarPanelOpen
+        hasAttemptedCalendarPanelOpen = true
+
+        showCalendarPanel(relativeTo: button, after: 0.01)
+        if shouldRetryFirstOpen {
+            showCalendarPanel(relativeTo: button, after: 0.18)
+        }
+    }
+
+    private func showCalendarPanel(relativeTo button: NSStatusBarButton, after delay: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self, weak button] in
+            guard let self, let button else { return }
+            self.panelController.show(relativeTo: button)
+        }
     }
 
     @objc private func showSettingsFromMenu() {
@@ -206,16 +230,52 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
 
-    private func ensureLaunchAtLoginEnabledIfAllowed() {
-        guard #available(macOS 13.0, *) else { return }
-        guard Bundle.main.bundleURL.pathExtension == "app" else { return }
-        guard !AppSettings.shared.launchAtLoginManuallyDisabled else { return }
-        guard SMAppService.mainApp.status != .enabled else { return }
+    private func acquireSingleInstanceLock() -> Bool {
+        let fileManager = FileManager.default
+        let baseURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first ?? fileManager.temporaryDirectory
+        let lockDirectoryURL = baseURL.appendingPathComponent("Acrylic Calendar", isDirectory: true)
 
         do {
-            try SMAppService.mainApp.register()
+            try fileManager.createDirectory(at: lockDirectoryURL, withIntermediateDirectories: true)
         } catch {
-            // Login item registration can fail outside a finalized app bundle; Settings still exposes manual control.
+            return true
+        }
+
+        let lockURL = lockDirectoryURL.appendingPathComponent("single-instance.lock")
+        let fileDescriptor = open(lockURL.path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR)
+        guard fileDescriptor >= 0 else { return true }
+
+        if flock(fileDescriptor, LOCK_EX | LOCK_NB) == 0 {
+            singleInstanceLockFileDescriptor = fileDescriptor
+            return true
+        }
+
+        close(fileDescriptor)
+        return false
+    }
+
+    private func releaseSingleInstanceLock() {
+        guard singleInstanceLockFileDescriptor >= 0 else { return }
+
+        flock(singleInstanceLockFileDescriptor, LOCK_UN)
+        close(singleInstanceLockFileDescriptor)
+        singleInstanceLockFileDescriptor = -1
+    }
+
+    private func terminateDuplicateRunningApplications() {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else { return }
+
+        let currentProcessIdentifier = ProcessInfo.processInfo.processIdentifier
+        for app in NSWorkspace.shared.runningApplications where app.bundleIdentifier == bundleIdentifier && app.processIdentifier != currentProcessIdentifier {
+            app.terminate()
+        }
+    }
+
+    private func scheduleDuplicateRunningApplicationCleanup() {
+        for delay in [1.0, 3.0, 8.0] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                self?.terminateDuplicateRunningApplications()
+            }
         }
     }
 }

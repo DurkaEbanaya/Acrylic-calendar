@@ -10,7 +10,7 @@ The app is intentionally configured as a menu bar utility:
 
 - `Resources/Info.plist` enables `LSUIElement`.
 - `main.swift` sets the activation policy to `.accessory`.
-- `AppDelegate` owns the `NSStatusItem`, menus, window controllers, and login item registration.
+- `AppDelegate` owns the single-instance guard, `NSStatusItem`, menus, and window controllers.
 
 This keeps the app out of the Dock while allowing windows and panels to be shown from the menu bar item.
 
@@ -37,9 +37,11 @@ Creates `NSApplication.shared`, attaches `AppDelegate`, sets `.accessory`, and s
 
 Coordinates application lifecycle:
 
+- Acquires a single-instance lock.
+- Terminates duplicate running copies with the same bundle identifier.
 - Applies appearance settings.
-- Registers login item automatically when allowed.
 - Creates and updates the menu bar status item.
+- Routes left-clicks on the status item through the same flyout-opening path as `Open calendar panel`.
 - Shows the flyout panel, full calendar window, Settings, and About window.
 - Rebuilds localized app menus when the app language changes.
 
@@ -52,7 +54,6 @@ Centralized settings backed by `UserDefaults`:
 - Hour cycle and seconds.
 - App language and resolved locale.
 - Accent color.
-- Login-item manual-disable flag.
 
 Settings changes post `.fluentCalendarSettingsChanged`.
 
@@ -63,6 +64,8 @@ In-code localization table. The selected `AppLanguage` controls both text lookup
 ### `CalendarPanelController.swift`
 
 Owns the menu bar flyout `NSPanel`. The panel is key-capable so text fields in quick event creation can receive keyboard focus.
+
+The status item left-click path calls `CalendarPanelController.show(relativeTo:)`, not a toggle. The first open request is retried once from `AppDelegate` to handle the initial AppKit status button tracking pass after login or relaunch.
 
 ### `CalendarPanelView.swift`
 
@@ -142,16 +145,14 @@ This avoids requiring an app restart before a newly-created event appears.
 
 ## Login Item Flow
 
-On app launch:
-
-1. If running as a packaged `.app`, the app checks `SMAppService.mainApp.status`.
-2. If the user has not manually disabled login item registration, the app calls `SMAppService.mainApp.register()`.
-3. If registration fails, the app silently continues and leaves the Settings checkbox available.
+On app launch, Acrylic Calendar does not register itself automatically.
 
 From Settings:
 
-- Turning the checkbox on registers the login item and clears the manual-disable flag.
-- Turning it off unregisters the login item and stores the manual-disable flag.
+- Turning the checkbox on calls `SMAppService.mainApp.register()`.
+- Turning it off calls `SMAppService.mainApp.unregister()`.
+
+At startup, `AppDelegate` also uses a per-user `flock` lock and terminates already-running copies with the same bundle identifier to prevent duplicate menu bar clocks.
 
 ## Release Artifacts
 

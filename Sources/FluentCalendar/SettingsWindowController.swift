@@ -390,10 +390,8 @@ final class SettingsContentView: NSView {
         do {
             if launchAtLoginCheckbox.state == .on {
                 try SMAppService.mainApp.register()
-                AppSettings.shared.launchAtLoginManuallyDisabled = false
             } else {
                 try SMAppService.mainApp.unregister()
-                AppSettings.shared.launchAtLoginManuallyDisabled = true
             }
         } catch {
             launchAtLoginCheckbox.state = SMAppService.mainApp.status == .enabled ? .on : .off
