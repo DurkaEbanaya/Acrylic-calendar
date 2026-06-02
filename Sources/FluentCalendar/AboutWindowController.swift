@@ -104,7 +104,7 @@ private final class AboutContentView: NSView {
         AcrylicAppIcon.makeImage(size: 104).draw(in: NSRect(x: 40, y: 54, width: 104, height: 104))
         drawText("Acrylic calendar", in: NSRect(x: 168, y: 62, width: 330, height: 38), font: windowsUIFont(size: 30, weight: .light), color: text)
         drawText("DurkaEbanaya", in: NSRect(x: 170, y: 106, width: 300, height: 24), font: windowsUIFont(size: 17, weight: .regular), color: secondary)
-        drawText("Version 1.1", in: NSRect(x: 170, y: 148, width: 200, height: 24), font: windowsUIFont(size: 15), color: text)
+        drawText("Version 1.2", in: NSRect(x: 170, y: 148, width: 200, height: 24), font: windowsUIFont(size: 15), color: text)
         drawText("2026", in: NSRect(x: 170, y: 176, width: 200, height: 24), font: windowsUIFont(size: 15), color: secondary)
         drawText(ProjectLinks.releases, in: NSRect(x: 40, y: 244, width: 480, height: 24), font: windowsUIFont(size: 15), color: NSColor(red: 0.45, green: 0.78, blue: 1.0, alpha: 1))
         drawText("Все права зачищены.", in: NSRect(x: 40, y: 286, width: 480, height: 24), font: windowsUIFont(size: 14), color: secondary)

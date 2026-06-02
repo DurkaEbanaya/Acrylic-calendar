@@ -100,13 +100,13 @@ dist/SHA256SUMS.txt
 Example release tag:
 
 ```text
-v1.1.0
+v1.2.0
 ```
 
 Example release title:
 
 ```text
-Acrylic Calendar 1.1
+Acrylic Calendar 1.2
 ```
 
 ## Clean Build
